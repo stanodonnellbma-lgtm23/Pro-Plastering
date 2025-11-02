@@ -125,25 +125,50 @@
             }
         }
 
-        /* Interactive Process Tabs */
+        /* --- UPDATED: Interactive Process Tabs --- */
         .tab-button {
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
+            padding-bottom: 1rem; /* Added padding */
         }
         .tab-button.active {
             color: #D4AF37; /* Gold color for active tab */
             border-bottom-color: #D4AF37;
+            background-color: rgba(212, 175, 55, 0.05); /* Faint gold background */
         }
         .tab-button:not(.active) {
             color: #888; /* Gray color for inactive tabs */
         }
+        .tab-button:not(.active):hover {
+            color: #EAEAEA; /* Lighten on hover */
+            background-color: rgba(255, 255, 255, 0.03);
+        }
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            /* UPDATED animation */
+            animation: fadeInScale 0.5s ease-in-out;
+            padding-top: 2rem; /* Added spacing from tabs */
+            min-height: 180px; /* Ensures consistent height */
+            display: none; /* Re-hide by default */
+            flex-direction: column;
+            justify-content: center;
         }
         .tab-content.active {
-            display: block;
+            display: flex; /* Use flex to center content */
         }
+        /* New animation for tab content */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        /* REMOVED .tab-content-wrapper */
+        /* --- End of Process Tab Updates --- */
 
 
     </style>
@@ -168,7 +193,8 @@
             <a href="#" class="text-3xl font-extrabold text-[#EAEAEA] tracking-wider logo-text">Pro-Plastering</a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="#services" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Services</a>
-                <a href="#results" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Our Work</a>
+                <!-- REMOVED "Our Work" link -->
+                <a href="#benefits" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Our Advantage</a>
                 <a href="#process" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Our Process</a>
                 <a href="#contact" class="px-5 py-2.5 rounded-full btn-cta text-sm font-semibold ml-4">Get a Free Quote</a>
             </nav>
@@ -243,32 +269,77 @@
             </div>
         </section>
 
-        <!-- Section 2.5: Showcase of Our Work -->
-        <!-- UPDATED to unified dark background and full-width video -->
-        <section id="results" class="py-20 md:py-32 bg-[#121212] overflow-hidden">
-            <div class="container mx-auto max-w-7xl px-6 text-center">
-                <!-- Text Content -->
-                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4 text-[#EAEAEA] scroll-reveal">
-                    A <span class="text-[#D4AF37]">Showcase</span> of Our Work
+        <!-- REMOVED: "A Showcase of Our Work" section -->
+
+
+        <!-- UPDATED SECTION: Benefits -->
+        <section id="benefits" class="py-20 md:py-32 bg-[#121212]">
+            <div class="container mx-auto max-w-5xl px-6"> <!-- Using max-w-5xl for this layout -->
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-6 text-[#EAEAEA] scroll-reveal">
+                    The <span class="text-[#D4AF37]">Pro-Plastering</span> Advantage
                 </h2>
-                <p class="text-xl text-gray-400 mb-16 max-w-3xl mx-auto scroll-reveal" style="transition-delay: 0.1s;">
-                    Our commitment to quality is visible in every job. See an example of our flawless exterior rendering, providing a clean, modern, and durable finish.
+                <p class="text-xl text-gray-400 text-center mb-16 md:mb-24 max-w-3xl mx-auto scroll-reveal" style="transition-delay: 0.1s;">
+                    We are a young, innovative firm dedicated to pushing the boundaries of quality and service. We combine modern techniques with timeless craftsmanship.
                 </p>
-            </div>
-            
-            <!-- Full-width Video Container -->
-            <div>
-                <!-- REPLACED SLIDER WITH VIDEO -->
-                <!-- Set to autoplay (muted), loop, and no controls for seamless background look -->
-                <!-- `playsinline` is for iOS compatibility -->
-                <video class="w-full scroll-reveal" style="transition-delay: 0.2s;" autoplay muted loop playsinline>
-                    <!-- IMPORTANT: This file path assumes the video is in the same folder as the HTML -->
-                    <!-- This will only work once hosted. It will not work in a local preview. -->
-                    <source src="33d11915-cb9a-4a6b-a3ff-64af7bb759bd.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+
+                <!-- New alternating layout -->
+                <div class="space-y-16 md:space-y-20">
+
+                    <!-- Item 1: Cutting-Edge Techniques -->
+                    <!-- UPDATED: flex-row, gap-4, text-left on mobile -->
+                    <div class="flex flex-row items-center gap-4 md:gap-12 scroll-reveal" style="transition-delay: 0.1s;">
+                        <!-- Icon UPDATED: p-3, w-10, h-10 on mobile -->
+                        <div class="flex-shrink-0 p-3 md:p-5 rounded-full bg-[#1F1F1F] border border-[#333] shadow-lg">
+                            <svg class="w-10 h-10 md:w-16 md:h-16 text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.555L16.5 21.75l-.398-1.195a3.375 3.375 0 00-2.456-2.456L12.75 18l1.195-.398a3.375 3.375 0 002.456-2.456L16.5 14.25l.398 1.195a3.375 3.375 0 002.456 2.456l1.195.398-1.195.398a3.375 3.375 0 00-2.456 2.456z" />
+                            </svg>
+                        </div>
+                        <!-- Text UPDATED: text-left, text-2xl on mobile -->
+                        <div class="text-left">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-3 text-[#EAEAEA]">Cutting-Edge Techniques</h3>
+                            <p class="text-lg text-gray-400">We utilize the latest plastering tools and innovative methods, including advanced rendering systems, to ensure a superior, long-lasting finish.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Innovative -->
+                    <!-- UPDATED: flex-row, gap-4, text-left on mobile -->
+                    <div class="flex flex-row md:flex-row-reverse items-center gap-4 md:gap-12 scroll-reveal" style="transition-delay: 0.2s;">
+                        <!-- Icon UPDATED: p-3, w-10, h-10 on mobile -->
+                        <div class="flex-shrink-0 p-3 md:p-5 rounded-full bg-[#1F1F1F] border border-[#333] shadow-lg">
+                            <!-- UPDATED ICON: Simple "light-bulb" for innovation -->
+                            <svg class="w-10 h-10 md:w-16 md:h-16 text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5H9.75a.75.75 0 0 1-.75-.75Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.75c-3.866 0-7 3.134-7 7a7 7 0 0 0 7 7c3.866 0 7-3.134 7-7a7 7 0 0 0-7-7Zm0 11.25a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Z" />
+                            </svg>
+                        </div>
+                        <!-- Text UPDATED: text-left md:text-right, text-2xl on mobile -->
+                        <div class="text-left md:text-right">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-3 text-[#EAEAEA]">Innovative</h3>
+                            <p class="text-lg text-gray-400">As a fresh, dynamic company, we bring new energy and modern, creative solutions to every project, ensuring efficiency and a flawless result.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Digital-First Service -->
+                    <!-- UPDATED: flex-row, gap-4, text-left on mobile -->
+                    <div class="flex flex-row items-center gap-4 md:gap-12 scroll-reveal" style="transition-delay: 0.3s;">
+                        <!-- Icon UPDATED: p-3, w-10, h-10 on mobile -->
+                        <div class="flex-shrink-0 p-3 md:p-5 rounded-full bg-[#1F1F1F] border border-[#333] shadow-lg">
+                            <svg class="w-10 h-10 md:w-16 md:h-16 text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                            </svg>
+                        </div>
+                        <!-- Text UPDATED: text-left, text-2xl on mobile -->
+                        <div class="text-left">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-3 text-[#EAEAEA]">Digital-First Service</h3>
+                            <p class="text-lg text-gray-400">From fast, easy online quotes to clear digital communication, we make the entire process seamless, transparent, and hassle-free for you.</p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
+        <!-- End of Updated Section -->
 
 
         <!-- Section 3: Our Process -->
@@ -280,7 +351,8 @@
                 </h2>
                 
                 <!-- Tab Buttons -->
-                <div class="flex flex-col md:flex-row justify-center border-b border-gray-700 mb-12 scroll-reveal">
+                <!-- UPDATED: Added hover effect, faint bg on active, rounded top -->
+                <div class="flex flex-col md:flex-row justify-center border-b border-gray-700 mb-0 scroll-reveal rounded-t-lg overflow-hidden">
                     <button class="tab-button active text-xl md:text-2xl font-bold py-4 px-6 md:px-10" data-tab="tab1">
                         1. Consultation & Quote
                     </button>
@@ -293,7 +365,8 @@
                 </div>
                 
                 <!-- Tab Content -->
-                <div class="scroll-reveal">
+                <!-- REMOVED: Wrapper box -->
+                <div class="scroll-reveal"> <!-- Kept scroll-reveal -->
                     <div id="tab1" class="tab-content active text-center max-w-3xl mx-auto">
                         <h3 class="text-3xl font-bold mb-4 text-[#EAEAEA]">Consultation & Quote</h3>
                         <p class="text-lg text-gray-400">We start with a free, no-obligation visit to assess your project, discuss your requirements, and provide a clear, detailed quote with no hidden costs.</p>
@@ -382,7 +455,7 @@
             
             <div class="flex space-x-4">
                 <a href="https://www.instagram.com/proplastering_/" target="_blank" rel="noopener noreferrer" class="hover:text-[#D4AF37] transition text-gray-400">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664 4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.267.058 1.675.072 4.947.072s3.68-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.267.072-1.675.072-4.947s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664 4.771 4.919 4.919 1.266-.057 1.645-.069 4.85-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.267.058 1.675.072 4.947.072s3.68-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.267.072-1.675.072-4.947s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
                 </a>
             </div>
         </div>
@@ -453,7 +526,7 @@
                 setInterval(() => {
                     currentTestimonial = (currentTestimonial + 1) % testimonials.length;
                     showTestimonial(currentTestimonial);
-                }, 5000); // Change testimonial every 5 seconds
+                }, 7000); // UPDATED: Change testimonial every 7 seconds (was 5000)
             }
 
             // 7. Interactive Process Tabs
