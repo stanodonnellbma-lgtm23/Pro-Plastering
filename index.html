@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro-Plastering - Expert Plastering & Rendering Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- UPDATED FONTS: Using Playfair Display for headings and Lato for body text for a classier feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles & Typography */
+        body {
+            font-family: 'Lato', sans-serif; 
+            font-weight: 300;
+            background-color: #121212; /* Dark background */
+            color: #EAEAEA; /* Light text */
+        }
+
+        /* HEADINGS & LOGO: Use Playfair Display for a classy, serif feel */
+        h1, h2, h3, .logo-text, .btn-cta {
+            font-family: 'Playfair Display', serif; 
+        }
+        
+        /* Core Background */
+        .bg-gradient-main {
+            background-color: #121212;
+        }
+
+        /* CTA Button Styling - ACCENT COLOR CHANGED TO GOLD */
+        .btn-cta {
+            background-color: #D4AF37; /* Gold */
+            color: #121212; /* Dark text on gold button */
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Sticky Navigation Bar */
+        .nav-scrolled {
+            background-color: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(10px);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            /* mt-8 class is removed by JS when scrolled */
+        }
+        
+        /* Scroll Reveal Animation Classes */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Service Cards Micro-interaction */
+        .service-card {
+            background-color: #1F1F1F; /* Slightly lighter card */
+            border: 1px solid #333;
+            color: #EAEAEA;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: scale(1.03); 
+            background-color: #2a2a2a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Abstract Visual Pulsing Effect */
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.95); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        .orb-pulse {
+            animation: pulse 6s infinite ease-in-out;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.4); /* Gold shadow */
+            opacity: 0.6;
+        }
+
+        /* Form Input */
+        .form-input {
+            background-color: #1F1F1F;
+            border: 1px solid #444;
+            color: #EAEAEA;
+        }
+        .form-input::placeholder {
+            color: #888;
+        }
+        .form-input:focus {
+             outline: none;
+             border-color: #D4AF37; /* Gold focus color */
+             box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Testimonial Carousel */
+        .testimonial-carousel {
+            position: relative;
+        }
+        .testimonial-item {
+            display: none;
+        }
+        .testimonial-item.active {
+            display: block;
+            /* UPDATED ANIMATION: Fade in and slide up */
+            animation: fadeInUp 0.7s ease-in-out;
+        }
+        /* UPDATED KEYFRAMES */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        /* Interactive Process Tabs */
+        .tab-button {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button.active {
+            color: #D4AF37; /* Gold color for active tab */
+            border-bottom-color: #D4AF37;
+        }
+        .tab-button:not(.active) {
+            color: #888; /* Gray color for inactive tabs */
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body class="bg-gradient-main">
+    <!-- Live Date Banner -->
+    <div class="bg-[#D4AF37] text-center py-1 text-sm font-semibold text-[#121212]">
+        <!-- UPDATED TEXT -->
+        <p>Contact 07960437507 for a Free Quote</p>
+    </div>
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-[#121212] z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="text-4xl font-extrabold text-[#D4AF37] tracking-widest animate-pulse logo-text">PRO-PLASTERING</div>
+        <p class="mt-4 text-sm text-gray-400">Perfecting Your Walls...</p>
+    </div>
+
+    <!-- Header (Sticky Navigation) -->
+    <!-- Added mt-8, which is removed on scroll by JS -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-6 px-4 md:px-8 mt-8">
+        <div class="container mx-auto flex justify-between items-center max-w-7xl">
+            <a href="#" class="text-3xl font-extrabold text-[#EAEAEA] tracking-wider logo-text">Pro-Plastering</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#services" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Services</a>
+                <a href="#results" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Our Work</a>
+                <a href="#process" class="text-gray-300 hover:text-[#D4AF37] transition duration-200">Our Process</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full btn-cta text-sm font-semibold ml-4">Get a Free Quote</a>
+            </nav>
+            <button class="md:hidden text-[#EAEAEA] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero Section -->
+        <!-- UPDATED to unified dark background -->
+        <section id="hero" class="relative pt-40 pb-20 md:pt-56 md:pb-40 text-center overflow-hidden bg-[#121212]">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                <div class="w-80 h-80 md:w-[40rem] md:h-[40rem] bg-[#D4AF37] rounded-full orb-pulse blur-3xl"></div>
+            </div>
+
+            <div class="container mx-auto max-w-4xl px-6 relative z-10 scroll-reveal">
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-[#EAEAEA] leading-tight mb-3">
+                    Flawless Finishes, Expertly Delivered.
+                </h1>
+                
+                <p class="text-2xl sm:text-3xl font-extrabold text-[#D4AF37] mb-8">
+                    The Art of Plastering, Perfected.
+                </p>
+
+                <p class="text-xl sm:text-2xl text-gray-400 mb-10">
+                    High-quality interior and exterior plastering for residential and commercial projects across the region.
+                </p>
+                <a href="#contact" class="inline-block px-10 py-4 text-lg font-semibold rounded-full btn-cta scroll-reveal" style="transition-delay: 0.2s;">
+                    Get a Free Quote
+                </a>
+            </div>
+
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                <a href="#services" class="text-[#D4AF37] animate-bounce">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section 2: Core Services -->
+        <section id="services" class="py-20 md:py-32 bg-[#121212]">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-[#EAEAEA] scroll-reveal">
+                    Our <span class="text-[#D4AF37]">Plastering</span> Services
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="service-card p-8 rounded-xl shadow-lg scroll-reveal" style="transition-delay: 0.1s;">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-[#D4AF37]/10">
+                            <svg class="w-8 h-8 text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636l1.5-2.25L12 12.75l1.5-2.25L15 7.364" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-[#EAEAEA]">Interior Plastering & Skimming</h3>
+                        <p class="text-gray-400">Creating perfectly smooth walls and ceilings ready for decoration. From new builds to renovations, our skimming provides a flawless, durable finish.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-xl shadow-lg scroll-reveal" style="transition-delay: 0.2s;">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-[#D4AF37]/10">
+                           <svg class="w-8 h-8 text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.555L16.5 21.75l-.398-1.195a3.375 3.375 0 00-2.456-2.456L12.75 18l1.195-.398a3.375 3.375 0 002.456-2.456L16.5 14.25l.398 1.195a3.375 3.375 0 002.456 2.456l1.195.398-1.195.398a3.375 3.375 0 00-2.456 2.456z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-[#EAEAEA]">Plaster Repair & Restoration</h3>
+                        <p class="text-gray-400">From minor cracks and holes to significant water damage, we seamlessly repair and restore your walls to their original condition, matching existing textures.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-xl shadow-lg scroll-reveal" style="transition-delay: 0.3s;">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-[#D4AF37]/10">
+                            <svg class="w-8 h-8 text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-[#EAEAEA]">Exterior Rendering & Finishes</h3>
+                        <p class="text-gray-400">Protect and beautify your property's exterior with our durable rendering services, including monocouche, sand and cement, and modern silicone finishes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2.5: Showcase of Our Work -->
+        <!-- UPDATED to unified dark background and full-width video -->
+        <section id="results" class="py-20 md:py-32 bg-[#121212] overflow-hidden">
+            <div class="container mx-auto max-w-7xl px-6 text-center">
+                <!-- Text Content -->
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4 text-[#EAEAEA] scroll-reveal">
+                    A <span class="text-[#D4AF37]">Showcase</span> of Our Work
+                </h2>
+                <p class="text-xl text-gray-400 mb-16 max-w-3xl mx-auto scroll-reveal" style="transition-delay: 0.1s;">
+                    Our commitment to quality is visible in every job. See an example of our flawless exterior rendering, providing a clean, modern, and durable finish.
+                </p>
+            </div>
+            
+            <!-- Full-width Video Container -->
+            <div>
+                <!-- REPLACED SLIDER WITH VIDEO -->
+                <!-- Set to autoplay (muted), loop, and no controls for seamless background look -->
+                <!-- `playsinline` is for iOS compatibility -->
+                <video class="w-full scroll-reveal" style="transition-delay: 0.2s;" autoplay muted loop playsinline>
+                    <!-- IMPORTANT: This file path assumes the video is in the same folder as the HTML -->
+                    <!-- This will only work once hosted. It will not work in a local preview. -->
+                    <source src="33d11915-cb9a-4a6b-a3ff-64af7bb759bd.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+
+        <!-- Section 3: Our Process -->
+        <!-- UPDATED to be interactive tabs -->
+        <section id="process" class="py-20 md:py-32 relative bg-[#121212]">
+            <div class="container mx-auto max-w-5xl px-6 relative z-10">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-[#EAEAEA] scroll-reveal">
+                    Our <span class="text-[#D4AF37]">Simple</span> Process
+                </h2>
+                
+                <!-- Tab Buttons -->
+                <div class="flex flex-col md:flex-row justify-center border-b border-gray-700 mb-12 scroll-reveal">
+                    <button class="tab-button active text-xl md:text-2xl font-bold py-4 px-6 md:px-10" data-tab="tab1">
+                        1. Consultation & Quote
+                    </button>
+                    <button class="tab-button text-xl md:text-2xl font-bold py-4 px-6 md:px-10" data-tab="tab2">
+                        2. Preparation & Execution
+                    </button>
+                    <button class="tab-button text-xl md:text-2xl font-bold py-4 px-6 md:px-10" data-tab="tab3">
+                        3. Finishing & Clean-Up
+                    </button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="scroll-reveal">
+                    <div id="tab1" class="tab-content active text-center max-w-3xl mx-auto">
+                        <h3 class="text-3xl font-bold mb-4 text-[#EAEAEA]">Consultation & Quote</h3>
+                        <p class="text-lg text-gray-400">We start with a free, no-obligation visit to assess your project, discuss your requirements, and provide a clear, detailed quote with no hidden costs.</p>
+                    </div>
+                    <div id="tab2" class="tab-content text-center max-w-3xl mx-auto">
+                        <h3 class="text-3xl font-bold mb-4 text-[#EAEAEA]">Preparation & Execution</h3>
+                        <p class="text-lg text-gray-400">Our team meticulously prepares the work area, protecting your property with dust sheets before applying their expertise to deliver a high-quality plaster finish.</p>
+                    </div>
+                    <div id="tab3" class="tab-content text-center max-w-3xl mx-auto">
+                        <h3 class="text-3xl font-bold mb-4 text-[#EAEAEA]">Finishing & Clean-Up</h3>
+                        <p class="text-lg text-gray-400">We conduct a final quality check to ensure a perfect result, then thoroughly clean the site, leaving your space tidy and your walls flawlessly smooth.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <!-- UPDATED to unified dark background -->
+        <section id="testimonials" class="py-20 md:py-32 bg-[#121212]">
+            <div class="container mx-auto max-w-4xl px-6 text-center">
+                 <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-[#EAEAEA] scroll-reveal">
+                    What Our <span class="text-[#D4AF37]">Clients</span> Say
+                </h2>
+                <div class="testimonial-carousel scroll-reveal">
+                    <!-- Testimonials UPDATED with "Frankie" and "London/Surrey" -->
+                    <div class="testimonial-item active">
+                        <p class="text-2xl italic text-gray-300 mb-6">"Absolutely outstanding work. The finish is like glass. Frankie was professional, tidy, and finished on time. Couldn't ask for more."</p>
+                        <p class="font-bold text-lg text-[#D4AF37]">- Sarah J, London</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <p class="text-2xl italic text-gray-300 mb-6">"Pro-Plastering repaired a huge crack in our ceiling and you'd never know it was there. Frankie's work is fantastic, from start to finish."</p>
+                        <p class="font-bold text-lg text-[#D4AF37]">- Mark T, Surrey</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <p class="text-2xl italic text-gray-300 mb-6">"The external rendering on our house has completely transformed it. Frankie and the team were brilliant, professional and the quality is second to none."</p>
+                        <p class="font-bold text-lg text-[#D4AF37]">- David & Emily R, London</p>
+                    </div>
+                </div>
+                <!-- Removed Previous/Next buttons -->
+            </div>
+        </section>
+
+        <!-- Section 4: Contact Form -->
+        <section id="contact" class="py-20 md:py-32 bg-[#121212]">
+            <div class="container mx-auto max-w-3xl px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-[#EAEAEA] mb-6 scroll-reveal">
+                    Ready for a Flawless Finish?
+                </h2>
+                <p class="text-xl text-gray-400 mb-12 scroll-reveal" style="transition-delay: 0.1s;">
+                    Get in touch today for a free, no-obligation quote. Tell us about your project below, and we'll get back to you to arrange a visit.
+                </p>
+
+                <!-- UPDATED Form: Connected to Formspree -->
+                <form id="quoteForm" action="https://formspree.io/f/xanlvplb" method="POST" class="bg-[#1F1F1F] p-8 md:p-12 rounded-2xl border border-[#333] shadow-xl scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <!-- Added 'name' attributes for Formspree -->
+                        <input type="text" name="Name" placeholder="Your Name" required class="form-input w-full p-3 rounded-lg placeholder-gray-500">
+                        <input type="email" name="Email" placeholder="Your Email" required class="form-input w-full p-3 rounded-lg placeholder-gray-500">
+                    </div>
+                    <div class="mb-6">
+                        <input type="text" name="Project Address" placeholder="Project Address (Optional)" class="form-input w-full p-3 rounded-lg placeholder-gray-500">
+                    </div>
+                    <div class="mb-8">
+                        <textarea name="Project Description" placeholder="Briefly describe your project..." rows="4" required class="form-input w-full p-3 rounded-lg placeholder-gray-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-10 py-4 text-lg font-semibold rounded-full btn-cta">
+                        Get My Free Quote
+                    </button>
+                    <!-- This div can be used by Formspree for a success message, but Formspree also has its own page -->
+                    <div id="messageBox" class="mt-4 text-[#D4AF37] font-medium hidden"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-gray-800">
+        <div class="container mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+            <p class="mb-4 md:mb-0">© 2025 Pro-Plastering. All Rights Reserved.</p>
+
+            <div class="flex space-x-6 mb-4 md:mb-0">
+                <a href="privacy-policy.html" class="hover:text-[#D4AF37] transition">Privacy Policy</a>
+                <a href="terms-of-service.html" class="hover:text-[#D4AF37] transition">Terms of Service</a>
+            </div>
+            
+            <div class="flex space-x-4">
+                <a href="https://www.instagram.com/proplastering_/" target="_blank" rel="noopener noreferrer" class="hover:text-[#D4AF37] transition text-gray-400">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664 4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.267.058 1.675.072 4.947.072s3.68-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.267.072-1.675.072-4.947s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- JAVASCRIPT FOR INTERACTIVITY ---
+
+            // 1. Preloader Fade Out
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 500);
+                }, 1000); 
+            }
+
+            // 2. Scroll Animation Setup
+            const navbar = document.getElementById('navbar');
+            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+
+            const checkScroll = () => {
+                // Sticky Navbar Logic UPDATED
+                if (window.scrollY > 50) {
+                    navbar.classList.add('nav-scrolled');
+                    navbar.classList.remove('mt-8'); // This removes the gap
+                } else {
+                    navbar.classList.remove('nav-scrolled');
+                    navbar.classList.add('mt-8'); // This adds the gap back when at top
+                }
+
+                // Scroll Reveal Logic
+                scrollRevealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const viewHeight = window.innerHeight;
+                    if (rect.top <= viewHeight * 0.85) {
+                        el.classList.add('visible');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Run once on load
+
+            // 3. Form Submission (Handled by Formspree)
+            // No JavaScript needed here anymore.
+
+            // 4. Live Date Banner (Removed)
+            // The banner is now static text.
+
+            // 5. Before & After Slider (Removed)
+            // This section is now a video.
+            
+            // 6. Testimonials Carousel (Auto-scroll)
+            const testimonials = document.querySelectorAll('.testimonial-item');
+            if(testimonials.length > 0) {
+                let currentTestimonial = 0;
+                const showTestimonial = (index) => {
+                    testimonials.forEach((item, i) => {
+                        item.classList.remove('active');
+                        if (i === index) {
+                            item.classList.add('active');
+                        }
+                    });
+                };
+                // Re-enabled auto-scroll
+                setInterval(() => {
+                    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                    showTestimonial(currentTestimonial);
+                }, 5000); // Change testimonial every 5 seconds
+            }
+
+            // 7. Interactive Process Tabs
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+
+                    // Update buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Update content
+                    tabContents.forEach(content => {
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
+
